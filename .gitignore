@@ -1,4 +1,3 @@
+plugins/carmarket/target
+apps/*/target
 *.log
-*.pot
-*.pyc
-local_settings.py
