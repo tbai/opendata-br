@@ -1,3 +1,3 @@
-plugins/carmarket/target
+plugins/*/target
 apps/*/target
 *.log
