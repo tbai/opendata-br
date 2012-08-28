@@ -4,7 +4,8 @@ opendata-br
 Visualização de dados abertos brasileiros.
 
 Dados abertos:
-http://dados.gov.br/dataset/ocorrencias-criminais-no-estado-do-rio-grande-do-sul
+- http://dados.gov.br/dataset/despesas-diretas-do-poder-executivo-federal-publicados-no-portal-da-transparencia
+- http://dados.gov.br/dataset/ocorrencias-criminais-no-estado-do-rio-grande-do-sul
 
 Banco de dados:
 
