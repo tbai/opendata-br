@@ -9,7 +9,7 @@ Dados abertos:
 
 Banco de dados:
 
-- CREATE DATABASE opendata_br CHARACTER SET utf8 COLLATE utf8_general_ci;
-- CREATE USER 'opendatauser'@'localhost' IDENTIFIED BY 'opendatauser';
-- GRANT ALL PRIVILEGES ON *.* TO 'opendatauser'@'localhost' WITH GRANT OPTION;
+- CREATE DATABASE opendatabr CHARACTER SET utf8 COLLATE utf8_general_ci;
+- CREATE USER 'opendatabr'@'localhost' IDENTIFIED BY 'opendatabr';
+- GRANT ALL PRIVILEGES ON \*.\* TO 'opendatabr'@'localhost' WITH GRANT OPTION;
                             
