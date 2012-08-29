@@ -26,13 +26,16 @@
                             %>
                             <span><g:message code="datamenu.subtitle.executivo_federal"/></span>
                             <ul>
-                                <% dataId='despesas_executivo_federal'; %>
-                                <li><a href="${createLink(controller:'data', action:'view', id:dataId)}">
-                                    <g:message code="datamenu.${dataId}"/>
+
+                                <!-- despesas_executivo_federal -->
+                                <li><a href="${createLink(controller:'DespesasExecutivoFederal', action:'icicleTree')}"
+                                    target="data_frame">
+                                    <g:message code="datamenu.despesas_executivo_federal"/>
                                 </a></li>
-                                <% dataId='servidores_executivo_federal'; %>
+
+                                <!-- servidores_executivo_federal -->
                                 <li><a href="${createLink(controller:'data', action:'view', id:dataId)}">
-                                    <g:message code="datamenu.${dataId}"/>
+                                    <g:message code="datamenu.servidores_executivo_federal"/>
                                 </a></li>
                             </ul>
                         </li>
