@@ -11,5 +11,5 @@ Banco de dados:
 
 - CREATE DATABASE opendatabr CHARACTER SET utf8 COLLATE utf8_general_ci;
 - CREATE USER 'opendatabr'@'localhost' IDENTIFIED BY 'opendatabr';
-- GRANT ALL PRIVILEGES ON *.* TO 'opendatabr'@'localhost' WITH GRANT OPTION;
+- GRANT ALL PRIVILEGES ON \*.\* TO 'opendatabr'@'localhost' WITH GRANT OPTION;
                             
