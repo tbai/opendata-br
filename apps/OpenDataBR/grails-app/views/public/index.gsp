@@ -28,7 +28,7 @@
                             <ul>
 
                                 <!-- despesas_executivo_federal -->
-                                <li><a href="${createLink(controller:'DespesasExecutivoFederal', action:'icicleTree')}"
+                                <li><a href="${createLink(controller:'DespesasExecutivoFederal', action:'barChart')}"
                                     target="data_frame">
                                     <g:message code="datamenu.despesas_executivo_federal"/>
                                 </a></li>
@@ -46,7 +46,7 @@
             <div class="ym-col3">
                 <div class="ym-cbox" id="dataContainer">
                     <div>
-                        <iframe name="data_frame" src="" frameBorder="0" width="100%" height="400" scrolling="auto"></iframe>
+                        <iframe name="data_frame" src="" frameBorder="0" width="100%" height="500" scrolling="auto"></iframe>
                     </div>
                     <div id="commentsEl">
                         <h3>Comentários</h3>

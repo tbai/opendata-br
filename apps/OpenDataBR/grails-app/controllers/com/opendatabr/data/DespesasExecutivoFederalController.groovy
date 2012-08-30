@@ -1,6 +1,7 @@
 package com.opendatabr.data
 
 import org.grails.plugins.csv.CSVMapReader
+import grails.converters.JSON
 
 class DespesasExecutivoFederalController {
 
@@ -37,15 +38,20 @@ class DespesasExecutivoFederalController {
                         map[header[i]] = t
                     }
                 }
-                DespesasExecutivoFederal.findOrSaveWhere(map)
+                try{
+                    DespesasExecutivoFederal.findOrSaveWhere(map)
+                } catch(Exception domainEx){
+                    DespesasExecutivoFederal.withSession { session ->
+                        session.clear()
+                    }        
+                    log.error "Erro ao importar dado.", domainEx
+                }
             }
            
             flash.message = "Arquivo de dados importado com sucesso."
             
         } catch(Exception ex){
-            DespesasExecutivoFederal.withSession { session ->
-                session.clear()
-            }
+            
             flash.error = ex.message   
             log.error "Erro ao importar arquivo de dados.", ex
         }
@@ -57,7 +63,7 @@ class DespesasExecutivoFederalController {
 
     }
 
-    def icicleTree(){
+    def barChart(){
         def result = DespesasExecutivoFederal.withCriteria{
             projections{
                 groupProperty "ano"
@@ -67,18 +73,16 @@ class DespesasExecutivoFederalController {
             
         }
 
-        def json = [labels:[], values:[]]
+        def json = [label:[], values:[]]
 
         def anos  = result.toList().groupBy{ it[0] }.collect{key, value -> key}
-        render anos
-        render "<hr/>"
+        
 
         def nomes = result.toList().groupBy{ it[1] }.collect{key, value -> key}
 
-        render nomes
-        render "<hr/>"
+        
 
-        json.labels = nomes
+        json.label = nomes
 
         def map = [:]
         anos.each{ ano->
@@ -90,21 +94,14 @@ class DespesasExecutivoFederalController {
             result.findAll{
                 it[0] == ano
             }.each { line->
-                val.values << line[2]
+                val.values << ((line[2] / 1000000) as int)
             }
             
             json.values << val
         }
 
-        render "<br/><br/>json=<hr/>"
-        render json
-
-        render "<br/><br/><hr/>"
-        result.each{
-            render it
-            render "<br/>"
-        }
-
+        
+        [jsonData:json.encodeAsJSON()]
 
     }
 }
