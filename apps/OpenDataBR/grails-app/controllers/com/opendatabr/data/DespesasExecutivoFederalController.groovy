@@ -41,10 +41,10 @@ class DespesasExecutivoFederalController {
                 try{
                     DespesasExecutivoFederal.findOrSaveWhere(map)
                 } catch(Exception domainEx){
-                    DespesasExecutivoFederal.withSession { session ->
+                    /*DespesasExecutivoFederal.withSession { session ->
                         session.clear()
-                    }        
-                    log.error "Erro ao importar dado.", domainEx
+                    }*/
+                    log.error "Erro ao importar dado. map=${map}", domainEx
                 }
             }
            
@@ -67,20 +67,19 @@ class DespesasExecutivoFederalController {
         def result = DespesasExecutivoFederal.withCriteria{
             projections{
                 groupProperty "ano"
-                groupProperty "nome_orgao_superior"
+                //groupProperty "nome_orgao_superior"
+                groupProperty "nome_subfuncao"
+                //groupProperty "nome_grupo_despesa"
                 sum "valor"
             }
+            eq 'nome_grupo_despesa', 'Investimentos'
+            eq 'nome_funcao', 'Educação'
             
         }
 
         def json = [label:[], values:[]]
-
         def anos  = result.toList().groupBy{ it[0] }.collect{key, value -> key}
-        
-
         def nomes = result.toList().groupBy{ it[1] }.collect{key, value -> key}
-
-        
 
         json.label = nomes
 
@@ -91,10 +90,17 @@ class DespesasExecutivoFederalController {
                 label: ano, 
                 values: [] ]
 
+            nomes.each{
+                val.values << 0
+            }
+
             result.findAll{
                 it[0] == ano
             }.each { line->
-                val.values << ((line[2] / 1000000) as int)
+                def nomeAtual = line[1]
+                def valorAtual = line[2] 
+                def index = nomes.indexOf(nomeAtual)
+                val.values[index] = (( valorAtual/ 1000000) as int)
             }
             
             json.values << val
